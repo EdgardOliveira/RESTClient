@@ -32,7 +32,6 @@
             this.tabpgRequisicao = new System.Windows.Forms.TabPage();
             this.cbbbxRecurso = new System.Windows.Forms.ComboBox();
             this.lblRecurso = new System.Windows.Forms.Label();
-            this.lstbxRequisicaoCorpo = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbbxTipoConteudo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,17 +45,17 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCarregar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tbctrResposta = new System.Windows.Forms.TabControl();
+            this.tbpgCabecalho = new System.Windows.Forms.TabPage();
             this.lstbxRespostaCabecalho = new System.Windows.Forms.ListBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tbpgCorpo = new System.Windows.Forms.TabPage();
             this.lstbxRespostaCorpo = new System.Windows.Forms.ListBox();
             this.tabctrlConfiguracoes.SuspendLayout();
             this.tabpgRequisicao.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tbctrResposta.SuspendLayout();
+            this.tbpgCabecalho.SuspendLayout();
+            this.tbpgCorpo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlConfiguracoes
@@ -73,7 +72,6 @@
             // 
             this.tabpgRequisicao.Controls.Add(this.cbbbxRecurso);
             this.tabpgRequisicao.Controls.Add(this.lblRecurso);
-            this.tabpgRequisicao.Controls.Add(this.lstbxRequisicaoCorpo);
             this.tabpgRequisicao.Controls.Add(this.label4);
             this.tabpgRequisicao.Controls.Add(this.cbbxTipoConteudo);
             this.tabpgRequisicao.Controls.Add(this.label3);
@@ -94,7 +92,8 @@
             this.cbbbxRecurso.FormattingEnabled = true;
             this.cbbbxRecurso.Items.AddRange(new object[] {
             "Attendants/",
-            "Deliveries/"});
+            "Deliveries/",
+            "69050001/json/"});
             this.cbbbxRecurso.Location = new System.Drawing.Point(348, 89);
             this.cbbbxRecurso.Name = "cbbbxRecurso";
             this.cbbbxRecurso.Size = new System.Drawing.Size(170, 21);
@@ -109,14 +108,6 @@
             this.lblRecurso.TabIndex = 8;
             this.lblRecurso.Text = "Recurso";
             // 
-            // lstbxRequisicaoCorpo
-            // 
-            this.lstbxRequisicaoCorpo.FormattingEnabled = true;
-            this.lstbxRequisicaoCorpo.Location = new System.Drawing.Point(20, 147);
-            this.lstbxRequisicaoCorpo.Name = "lstbxRequisicaoCorpo";
-            this.lstbxRequisicaoCorpo.Size = new System.Drawing.Size(498, 134);
-            this.lstbxRequisicaoCorpo.TabIndex = 7;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -130,7 +121,9 @@
             // 
             this.cbbxTipoConteudo.FormattingEnabled = true;
             this.cbbxTipoConteudo.Items.AddRange(new object[] {
-            "application/json"});
+            "application/json",
+            "application/xml",
+            "application/html"});
             this.cbbxTipoConteudo.Location = new System.Drawing.Point(179, 39);
             this.cbbxTipoConteudo.Name = "cbbxTipoConteudo";
             this.cbbxTipoConteudo.Size = new System.Drawing.Size(339, 21);
@@ -149,7 +142,8 @@
             // 
             this.cbbxUri.FormattingEnabled = true;
             this.cbbxUri.Items.AddRange(new object[] {
-            "http://127.0.0.1:212/datasnap/rest/TSM/"});
+            "http://127.0.0.1:212/datasnap/rest/TSM/",
+            "https://viacep.com.br/ws/"});
             this.cbbxUri.Location = new System.Drawing.Point(20, 89);
             this.cbbxUri.Name = "cbbxUri";
             this.cbbxUri.Size = new System.Drawing.Size(300, 21);
@@ -177,7 +171,7 @@
             this.cbbxMetodoRequisicao.Name = "cbbxMetodoRequisicao";
             this.cbbxMetodoRequisicao.Size = new System.Drawing.Size(133, 21);
             this.cbbxMetodoRequisicao.TabIndex = 1;
-            this.cbbxMetodoRequisicao.SelectedValueChanged += new System.EventHandler(this.cbbxMetodoRequisicao_SelectedValueChanged);
+            this.cbbxMetodoRequisicao.SelectedIndexChanged += new System.EventHandler(this.cbbxMetodoRequisicao_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -226,6 +220,7 @@
             this.btnSalvar.TabIndex = 3;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Visible = false;
             // 
             // btnCarregar
             // 
@@ -235,10 +230,11 @@
             this.btnCarregar.TabIndex = 4;
             this.btnCarregar.Text = "Carregar";
             this.btnCarregar.UseVisualStyleBackColor = true;
+            this.btnCarregar.Visible = false;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tabControl2);
+            this.groupBox1.Controls.Add(this.tbctrResposta);
             this.groupBox1.Location = new System.Drawing.Point(12, 336);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(547, 197);
@@ -246,28 +242,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resposta";
             // 
-            // tabControl2
+            // tbctrResposta
             // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl2.Location = new System.Drawing.Point(3, 16);
-            this.tabControl2.Multiline = true;
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(541, 178);
-            this.tabControl2.TabIndex = 7;
+            this.tbctrResposta.Controls.Add(this.tbpgCabecalho);
+            this.tbctrResposta.Controls.Add(this.tbpgCorpo);
+            this.tbctrResposta.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbctrResposta.Location = new System.Drawing.Point(3, 16);
+            this.tbctrResposta.Multiline = true;
+            this.tbctrResposta.Name = "tbctrResposta";
+            this.tbctrResposta.SelectedIndex = 0;
+            this.tbctrResposta.Size = new System.Drawing.Size(541, 178);
+            this.tbctrResposta.TabIndex = 7;
             // 
-            // tabPage3
+            // tbpgCabecalho
             // 
-            this.tabPage3.Controls.Add(this.lstbxRespostaCabecalho);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(533, 152);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Cabeçalho";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tbpgCabecalho.Controls.Add(this.lstbxRespostaCabecalho);
+            this.tbpgCabecalho.Location = new System.Drawing.Point(4, 22);
+            this.tbpgCabecalho.Name = "tbpgCabecalho";
+            this.tbpgCabecalho.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgCabecalho.Size = new System.Drawing.Size(533, 152);
+            this.tbpgCabecalho.TabIndex = 0;
+            this.tbpgCabecalho.Text = "Cabeçalho";
+            this.tbpgCabecalho.UseVisualStyleBackColor = true;
             // 
             // lstbxRespostaCabecalho
             // 
@@ -277,16 +273,16 @@
             this.lstbxRespostaCabecalho.Size = new System.Drawing.Size(497, 134);
             this.lstbxRespostaCabecalho.TabIndex = 10;
             // 
-            // tabPage4
+            // tbpgCorpo
             // 
-            this.tabPage4.Controls.Add(this.lstbxRespostaCorpo);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(533, 152);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Corpo";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tbpgCorpo.Controls.Add(this.lstbxRespostaCorpo);
+            this.tbpgCorpo.Location = new System.Drawing.Point(4, 22);
+            this.tbpgCorpo.Name = "tbpgCorpo";
+            this.tbpgCorpo.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgCorpo.Size = new System.Drawing.Size(533, 152);
+            this.tbpgCorpo.TabIndex = 1;
+            this.tbpgCorpo.Text = "Corpo";
+            this.tbpgCorpo.UseVisualStyleBackColor = true;
             // 
             // lstbxRespostaCorpo
             // 
@@ -308,14 +304,15 @@
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.tabctrlConfiguracoes);
             this.Name = "frmPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RESTClient";
             this.tabctrlConfiguracoes.ResumeLayout(false);
             this.tabpgRequisicao.ResumeLayout(false);
             this.tabpgRequisicao.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
+            this.tbctrResposta.ResumeLayout(false);
+            this.tbpgCabecalho.ResumeLayout(false);
+            this.tbpgCorpo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -324,7 +321,6 @@
 
         private System.Windows.Forms.TabControl tabctrlConfiguracoes;
         private System.Windows.Forms.TabPage tabpgRequisicao;
-        private System.Windows.Forms.ListBox lstbxRequisicaoCorpo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbbxTipoConteudo;
         private System.Windows.Forms.Label label3;
@@ -338,9 +334,9 @@
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnCarregar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabControl tbctrResposta;
+        private System.Windows.Forms.TabPage tbpgCabecalho;
+        private System.Windows.Forms.TabPage tbpgCorpo;
         private System.Windows.Forms.ComboBox cbbbxRecurso;
         private System.Windows.Forms.Label lblRecurso;
         private System.Windows.Forms.ListBox lstbxRespostaCabecalho;
